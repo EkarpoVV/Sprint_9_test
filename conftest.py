@@ -1,12 +1,10 @@
 import pytest
 from selenium import webdriver
-from urls import *
 from pages.login_page import LoginPage
 from pages.create_account_page import CreateAccountPage
 from generators import Generatorss
 from pages.recipe_page import RecipePage
-
-
+from pathlib import Path
 from selenium.webdriver.remote.file_detector import LocalFileDetector
 from config import BROWSER_NAME, BROWSER_VERSION, SELENOID_URL
 
@@ -41,30 +39,6 @@ def driver():
     browser.set_window_size(1920, 1080)
     yield browser
     browser.quit()
-
-
-
-"""
-@pytest.fixture()
-def driver():
-    driver = webdriver.Chrome()
-
-    yield driver
-    driver.quit()
-
-
-@pytest.fixture(params=['Chrome','Firefox'])
-def driver(request):
-    if request.param == 'Chrome':
-        driver = webdriver.Chrome()
-    else:
-        driver = webdriver.Firefox()
-    driver.browser_name = request.param
-
-    yield driver
-    driver.quit()
-"""
-
 
 @pytest.fixture()
 def create_account_page(driver):
@@ -116,36 +90,10 @@ def create_and_login_user(create_account_page,login_page):
     login_page.set_email(user_name)
     login_page.set_password(user_password)
     login_page.click_login_button()
-    # Удаления узера в этом задании нет и возвращать нечего
 
-"""
-@pytest.fixture()
-def user():
-    body = Generatorss.generate_random_payload_for_register_new_user()
-    response = requests.post(
-                f"{BASE_URL}{API}{USER_URL}register", json=body)
-    yield response.json(), response.status_code, body
-    requests.delete(f"{BASE_URL}{API}{USER_URL}", headers={
-        "Authorization": response.json().get("accessToken")
-    })
+
+BASE_DIR = Path(__file__).resolve().parent
 
 @pytest.fixture
-def authorized_user(main_page, login_page, user,constructor_page):
-    main_page.open_main_page_stellarburgers()
-    main_page.click_personal_account_button()
-    _, _, body = user
-    login_page.login(
-        email=body.get("email"),
-        password=body.get("password"))
-    constructor_page.close_modal()
-    
-@pytest.fixture()
-def user_with_order(authorized_user,constructor_page):
-    constructor_page.add_buns_to_order()
-    constructor_page.click_place_order_button()
-    constructor_page.wait_invisible_order_9999()
-    constructor_page.close_order_id_popup()
-    constructor_page.close_modal()
-
-
-"""
+def recipe_image():
+    return BASE_DIR / "assets" / "test_recipe_image.JPG"

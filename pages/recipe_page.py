@@ -1,7 +1,6 @@
 from pages.base_page import BasePage
 import allure
 from urls import *
-from locators.login_locators import LoginPageLocators
 from locators.create_recipe_locators import CreateRecipePageLocators
 
 class RecipePage(BasePage):
@@ -45,8 +44,6 @@ class RecipePage(BasePage):
     @allure.step("Заполнить поле Описание рецепта")
     def set_recipe_description(self,text):
         self.add_text_to_element(CreateRecipePageLocators.RECIPE_DESCRIPTION_FILD, text)
-
-    ## Загрузит фото
 
     @allure.step("Загрузить картинку рецепта")
     def upload_recipe_image(self, path_to_file):

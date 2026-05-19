@@ -1,7 +1,5 @@
 import allure
-from pathlib import Path
 from generators import Generatorss
-
 
 class TestCreateRecipePage:
 
@@ -16,8 +14,6 @@ class TestCreateRecipePage:
         recipe_page.click_add_ingredient_button()
         recipe_page.set_coocking_time("33")
         recipe_page.set_recipe_description(Generatorss.generate_random_string(8))
-        #CURRENT_DIR = Path(__file__).parent 
-        #FILE_PATH = (CURRENT_DIR.parent / "assets" / "test_recipe_image.JPG").resolve()
         recipe_page.upload_recipe_image(str(recipe_image))   #передаем путь файла в метод
         recipe_page.scrol_to_down_create_recipe_button()
         recipe_page.click_create_recipe_button()

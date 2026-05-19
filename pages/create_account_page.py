@@ -1,10 +1,4 @@
-#from locators.login_locators import SigninPageLocators
 from locators.crete_account_locators import CreateAccountPageLocators
-#from selenium.webdriver.support import expected_conditions 
-#from selenium.webdriver.support.wait import WebDriverWait
-#from selenium.webdriver.support import expected_conditions
-#from selenium.webdriver.common.action_chains import ActionChains
-#from selenium.common import TimeoutException
 from pages.base_page import BasePage
 import allure
 from urls import *
