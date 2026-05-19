@@ -29,7 +29,7 @@ class TestCreateRecipePage:
         recipe_page.click_create_recipe_button()
         recipe_name_from_new_card = recipe_page.get_recipe_name_after_create_recipe()
 
-        assert recipe_name == 2 #recipe_name_from_new_card
+        assert recipe_name == recipe_name_from_new_card
 
     
 
